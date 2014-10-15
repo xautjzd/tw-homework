@@ -26,10 +26,10 @@ describe TaxCalculator do
 		end
 	end
 
-	context "#calculate_tax" do
+	context "#get_tax" do
 		it "get sales tax of the specified product" do
-			expect(subject.calculate_tax(14.99, 0.1)).to be == 1.5
-			expect(subject.calculate_tax(47.5, 0.15)).to be == 7.15
+			expect(subject.get_tax(14.99, 0.1)).to be == 1.5
+			expect(subject.get_tax(47.5, 0.15)).to be == 7.15
 		end
 	end
 end

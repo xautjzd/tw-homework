@@ -16,11 +16,11 @@ class TaxCalculator
 
 		items.each do |item|
 			tax_rate = get_tax_rate(item)
-			tax = calculate_tax(item[:price], item[:quantity], tax_rate)
-			@total_tax += tax
+			tax = get_tax(item[:price], tax_rate)
+			@total_tax += tax * item[:quantity]
 
-			item[:sales_price] = (item[:price] * item[:quantity] + tax).round(2)
-			@total_price += item[:sales_price]
+			item[:sales_price] = (item[:price] + tax).round(2)
+			@total_price += item[:sales_price] * item[:quantity]
 		end
 
 		return @total_tax, @total_price
@@ -34,9 +34,9 @@ class TaxCalculator
 		return tax_rate
 	end
 
-	# Get total tax of the specified product
-	def calculate_tax(price, quantity, tax_rate)
-		tax = (price * quantity) * tax_rate
+	# Get tax of the specified product
+	def get_tax(price, tax_rate)
+		tax = price * tax_rate
 		round_tax(tax)
 	end
 
